@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<style> 
+
+body {
+    background-color: black;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    padding-left: 40px;
+    font-size: 3em;
+    color: yellow;
+    text-decoration: none;
+    user-select: none;
+    margin-right: auto;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    margin-left: auto;
+}
+
+.navigation a {
+    font-size: 1.1em;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.button-container {
+    display: flex;
+    gap: 15px;
+}
+
+
+
+.boksi {
+    position: relative;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+.brenda {
+    text-align: center;
+    width: 650px;
+    height: 500px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+#ka {
+    position: relative;
+    margin-top: 20px;
+    font-size: 3em;
+    color: yellow;
+}
+
+#name, #email,#password {
+    font-size: 1em;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: left; 
+    vertical-align: top; 
+    box-sizing: border-box; 
+    width: 300px;
+    height: 50px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+}
+#email {
+    
+    margin-top: 40px;
+}
+#name::placeholder, #email::placeholder,#password::placeholder {
+    text-align: left; 
+    color: #999; 
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px; 
+    
+    
+}
+
+
+.regjister {
+    padding: 8px 16px;
+    width: 180px;
+    height: 50px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: background-color 0.2s ease;
+    position: relative;
+    margin-top: 40px;
+}
+
+.regjister:hover {
+   background-color: #0205D3;
+}
+
+
+</style>
+
+<body>
+    <header>
+        <a href="LandingPage.html" class="logo">OnlineCar</a>
+        <nav class="navigation">
+            
+                <!-- <button onclick="location.href='signup.html'" class="signup-button">Signup</button> -->
+            </div>
+        </nav>
+    </header>
+
+    <div class="boksi">
+        <div class="brenda">
+            <form action="">
+                <h1 id="ka">Login</h1>
+                <div class="inputs-container">
+                  
+                    <input type="email" id="email" placeholder="Email">
+                    <input type="password" id="password" placeholder="Password">
+
+                    
+                </div>
+                <button class="regjister">Login</button>
+            </form>
+
+          <a href="signup-PA.html" style="text-decoration: none; color: black; position: relative; top: 20px;"> <strong><p id=tF>Don't have an account? Sign up here</p></strong></a> 
+          
+        </div>
+    </div>
+
+   
+      
+    
+</body>
+</html>
