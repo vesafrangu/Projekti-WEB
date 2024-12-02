@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, Helvetica, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header .logo {
+            text-decoration: none;
+            color: yellow;
+            font-size: 2em;
+        }
+
+        .services-section {
+            padding: 50px 0;
+            background-color: #333;
+        }
+
+        .services-section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: yellow;
+        }
+
+        .service-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background-color: #444;
+            color: white;
+            padding: 30px;
+            width: 30%;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .service-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: yellow;
+        }
+
+        .service-card p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .service-card a {
+            text-decoration: none;
+            color: yellow;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .service-card a:hover {
+            color: #0a0a71;
+        }
+
+        @media (max-width: 768px) {
+            .service-card {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">OnlineCar</a>
+    </header>
+
+    <section class="services-section">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="service-card">
+                <h3>Car Rentals</h3>
+                <p>We offer a reliable car rental services for both short and long-term needs. Rent your car today!</p>
+                <a href="#">More</a>
+            </div>
+            <div class="service-card">
+                <h3>Buy a Car</h3>
+                <p>Browse our selection of cars available for purchase. Find the perfect car for you at great prices!</p>
+                <a href="#">More</a>
+            </div>
+            <div class="service-card">
+                <h3>Sell Your Car</h3>
+                <p>Want to sell your car? We offer a quick and easy process to sell your vehicle. Get a great deal today!</p>
+                <a href="#">More</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
