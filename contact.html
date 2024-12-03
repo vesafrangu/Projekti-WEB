@@ -1,111 +1,71 @@
 <!DOCTYPE html>
-<html lang="sq">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact us</title>
-    <style>
-        body {
-            font-family: 'Poppins', Arial, Helvetica, sans-serif;
-            background-color: #1f1f24;
-            color: white;
-            margin: 0;
-            padding: 0;
-        }
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kontakt</title>
+    <link rel="stylesheet" href="contact.css" />
 
-        header {
-            background-color: #1f1f24;
-            color: white;
-            padding: 20px 0;
-            text-align: left;
-            padding-left: 20px;
-        }
-
-        header .logo {
-            text-decoration: none;
-            color: yellow;
-            font-size: 3em;
-        }
-
-        .contact-section {
-            margin-top: 100px;
-            padding: 20px;
-            background-color: white;
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-section h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: rgb(54, 48, 38);
-            text-align: center; 
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        label {
-            font-size: 1.2em;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        input, textarea {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 1em;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: yellow;
-            color: #34344a;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: #1f1f24;
-        }
-    </style>
-</head>
-<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
     <header>
-        <a href="#" class="logo">OnlineCar</a>
-    </header>
+      <a href="index.css" class="logo">OnlineCar</a>
+      <nav class="navigation">
+          
+          <div class="button-container">
+             
+             
+          </div>
+      </nav>
+  </header>
+    <div class="container">
+      <div class="content">
+        <div class="left-side">
+          <div class="address details">
+            <ion-icon name="globe"></ion-icon>
+            <div class="topic">Address</div>
+            <div class="text-one">Prishtine</div>
+            <div class="text-two">Zahir Pajaziti</div>
+          </div>
+          <div class="phone details">
+            <ion-icon name="call"></ion-icon>
+            <div class="topic">Phone</div>
+            <div class="text-one">+3834444444</div>
+          </div>
+          <div class="email details">
+            <ion-icon name="mail"></ion-icon>
+            <div class="topic">Email</div>
+            <div class="text-one">fatlumsyla@gmail.com</div>
+            <div class="text-one">vesafrangu@gmail.com</div>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="topic-text">Send us a message</div>
+          <p>Nese keni ndonje pyetje ose kerkese per OnlineCar ,ju lutem na shenoni.</p>
+          <form action="#">
+            <div class="input-box">
+              <input type="text" placeholder="Enter your name" />
+            </div>
+            <div class="input-box">
+              <input type="text" placeholder="Enter your email" />
+            </div>
+            <div class="input-box message-box">
+              <textarea placeholder="Enter your message"></textarea>
+            </div>
+            <div class="button">
+              <input type="button" value="Send Now" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
-    <section class="contact-section">
-        <h1>Contact us</h1>
-        <form action="#" method="post">
-            <div class="form-group">
-                <label for="name">Emri:</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email adress" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="message">Mesazhi:</label>
-                <textarea id="message" name="message" placeholder="Write your comment..." rows="5" required></textarea>
-            </div>
-            
-            <button type="submit">Send</button>
-        </form>
-    </section>
-</body>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
 </html>
+
+
+
