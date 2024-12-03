@@ -1,115 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Sherbimet</title>
+
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
         body {
-            font-family: 'Poppins', Arial, Helvetica, sans-serif;
-            background-color: black;
-            color: white;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: black;
+            color: #fff;
+            padding-top: 130px;
+            height: 1500px;
         }
 
         header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
             background-color: black;
             color: white;
-            padding: 20px 0;
-            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
-        header .logo {
+        .logo {
+            padding-left: 40px;
+            font-size: 3em;
+            color: yellow;
             text-decoration: none;
-            color: yellow;
-            font-size: 2em;
+            user-select: none;
+            margin-right: auto;
         }
 
-        .services-section {
-            padding: 50px 0;
-            background-color: #333;
-        }
-
-        .services-section h2 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: yellow;
-        }
-
-        .service-cards {
+        .navigation {
             display: flex;
-            justify-content: space-around;
+            align-items: center;
+            gap: 60px;
+            margin-left: auto;
+        }
+
+        .navigation a {
+            font-size: 1.1em;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .login-button, .signup-button {
+            padding: 8px 16px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: yellow;
+            color: rgb(0, 0, 0);
+            transition: background-color 0.2s ease;
+        }
+
+        .login-button:hover, .signup-button:hover {
+            background-color: #86a814;
+        }
+
+        h1,
+        h3 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            position: relative;
+            max-width: max-content;
+            margin: 5rem auto 5rem auto;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            width: 75%;
+            height: 5px;
+            background-color: yellow;
+            bottom: -2rem;
+            left: 25px;
+        }
+
+        i {
+            font-size: 3rem;
+            color: yellow;
+            padding: 1rem;
+            transition: all 0.3s linear;
+            transform: rotate(-45deg);
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
             flex-wrap: wrap;
+            justify-content: space-around;
         }
 
         .service-card {
-            background-color: #444;
-            color: white;
-            padding: 30px;
-            width: 30%;
-            margin: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            width: 300px;
+            margin: 20px;
+            padding: 2rem 20px 20px 20px;
             text-align: center;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
         }
 
-        .service-card h3 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: yellow;
+        .icon-container {
+            border: 2px solid yellow;
+            transition: 0.3s linear;
+            width: max-content;
+            margin: 0 auto;
+            transform: rotate(45deg);
         }
 
-        .service-card p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            color: white;
+        .service-card:hover {
+            box-shadow: 0 0 30px 0 yellow;
+            transform: scale(1.1);
         }
 
         .service-card a {
-            text-decoration: none;
             color: yellow;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        .service-card a:hover {
-            color: #0a0a71;
-        }
-
-        @media (max-width: 768px) {
-            .service-card {
-                width: 100%;
-                margin-bottom: 20px;
-            }
+            text-decoration: none;
         }
     </style>
 </head>
+
 <body>
     <header>
         <a href="#" class="logo">OnlineCar</a>
+        <nav class="navigation">
+            <a href="contact.html">Contact</a>
+            <div class="button-container">
+                <button onclick="location.href='login.html'" class="login-button">Login</button>
+                <button onclick="location.href='signup-PA.html'" class="signup-button">Sign Up</button>
+            </div>
+        </nav>
     </header>
 
-    <section class="services-section">
-        <h2>Our Services</h2>
-        <div class="service-cards">
-            <div class="service-card">
-                <h3>Car Rentals</h3>
-                <p>We offer a reliable car rental services for both short and long-term needs. Rent your car today!</p>
-                <a href="#">More</a>
+    <h1>Our Services</h1>
+    <div class="services-container">
+        <div class="service-card">
+            <div class="icon-container">
+                <i class="fa fa-car"></i>
             </div>
-            <div class="service-card">
-                <h3>Buy a Car</h3>
-                <p>Browse our selection of cars available for purchase. Find the perfect car for you at great prices!</p>
-                <a href="#">More</a>
-            </div>
-            <div class="service-card">
-                <h3>Sell Your Car</h3>
-                <p>Want to sell your car? We offer a quick and easy process to sell your vehicle. Get a great deal today!</p>
-                <a href="#">More</a>
-            </div>
+            <h3>Car Rentals</h3>
+            <p>We offer a reliable car rental serices for both short and long-term needs. Rent your car today!</p>
         </div>
-    </section>
+
+        <div class="service-card">
+            <div class="icon-container">
+                <i class="fa fa-dollar-sign"></i>
+            </div>
+            <h3>Buy a Car</h3>
+            <p>Browse our selection of cars available for purchase. Find the perfect car for you at great prices.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="icon-container">
+                <i class="fa fa-hand-holding-usd"></i>
+            </div>
+            <h3>Sell your car</h3>
+            <p>Want to sell your car? We offer a quick and easy process to sell your vehicle. Get a great deal today!</p>
+        </div>
+    </div>
 </body>
+
 </html>
