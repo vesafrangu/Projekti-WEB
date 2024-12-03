@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none; 
+}
+
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 99;
+  
+}
+
+.hide-header {
+  top: -100px; 
+}
+
+.logo {
+  font-size: 3em;
+  color: yellow;
+  user-select: none;
+  text-decoration: none !important; 
+}
+
+
+.navigation a {
+  position: relative;
+  right: 75px;
+  font-size: 1.1em;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 80px;
+}
+
+.navigation a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: yellow;
+  border-radius: 5px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+
+.navigation a:hover::after {
+  transform: scaleX(1);
+}
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px 60px 30px 40px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  position: absolute;
+  margin-bottom: -100px;
+  margin-left: 80px;
+}
+
+.container .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.container .content .left-side {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  position: relative;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.content .left-side::before {
+  content: "";
+  position: absolute;
+  height: 70%;
+  width: 2px;
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000000;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.content .left-side .details {
+  margin: 14px;
+  text-align: center;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.content .left-side .details ion-icon {
+  font-size: 30px;
+  color: black;
+  margin-bottom: 10px;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.content .left-side .details .topic {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.content .left-side .details .text-one,
+.content .left-side .details .text-two {
+  font-size: 14px;
+  color: #afafb6;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.container .content .right-side {
+  width: 75%;
+  margin-left: 75px;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.content .right-side .topic-text {
+  font-size: 23px;
+  font-weight: 600;
+  color: blue;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.right-side .input-box {
+  height: 55px;
+  width: 100%;
+  margin: 12px 0;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.right-side .input-box input,
+.right-side .input-box textarea {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #f0f1f8;
+  border-radius: 6px;
+  padding: 0 15px;
+  resize: none;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.right-side .message-box {
+  min-height: 110px;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.right-side .input-box textarea {
+  padding-top: 6px;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.right-side .button {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.right-side .button input[type="button"] {
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: blue;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+.button input[type="button"]:hover {
+  background: yellow;
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
