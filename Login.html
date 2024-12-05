@@ -137,7 +137,7 @@ header {
 }
 
 .regjister:hover {
-   background-color: #0205D3;
+   background-color: yellow;
 }
 
 
@@ -154,7 +154,7 @@ header {
     </header>
 
     <div class="boksi">
-        <div class="brenda">
+        <div class="brenda" id="loginForm">
             <form action="">
                 <h1 id="ka">Login</h1>
                 <div class="inputs-container">
@@ -164,7 +164,7 @@ header {
 
                     
                 </div>
-                <button class="regjister">Login</button>
+                <button type="submit" class="regjister">Login</button>
             </form>
 
           <a href="signup-PA.html" style="text-decoration: none; color: black; position: relative; top: 20px;"> <strong><p id=tF>Don't have an account? Sign up here</p></strong></a> 
@@ -174,6 +174,30 @@ header {
 
    
       
-    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const isEmailValid = emailPattern.test(email);
+            const isPasswordValid = password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[\W_]/.test(password);
+
+            if (isEmailValid && isPasswordValid) {
+                window.location.href = "#"; 
+            } else {
+                let errorMessage = 'Please ensure the following:\n';
+                if (!isEmailValid) {
+                    errorMessage += '- Enter a valid email (e.g., "example@example.com").\n';
+                }
+                if (!isPasswordValid) {
+                    errorMessage += '- Password must be at least 8 characters long.\n';
+                }
+                alert(errorMessage);
+            }
+        });
+    </script>
 </body>
 </html>
