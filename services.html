@@ -26,7 +26,7 @@
             background-color: black;
             color: #fff;
             padding-top: 130px;
-            height: 1500px;
+            
         }
 
         header {
@@ -151,6 +151,105 @@
             color: yellow;
             text-decoration: none;
         }
+
+
+        footer{
+    position: relative;
+    bottom: -200px;
+    background: black;
+    width: 100%;
+    
+    left: 0;
+
+ 
+  }
+  footer::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 100px;
+    height: 1px;
+    width: 100%;
+    background: #AFAFB6;
+  }
+  footer .content{
+    max-width: 1250px;
+    margin: auto;
+    padding: 30px 40px 40px 40px;
+  }
+  footer .content .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+  .content .top .logo-details{
+    color: #fff;
+    font-size: 30px;
+  }
+  
+  footer .content .link-boxes{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  footer .content .link-boxes .box{
+    width: calc(100% / 5 - 10px);
+  }
+  .content .link-boxes .box .link_name{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+
+  .content .link-boxes .box li a{
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: all 0.4s ease
+  }
+
+
+
+  .link-boxes .box {
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+ 
+
+  footer .bottom-details{
+    width: 100%;
+    background: #000000;
+  }
+  footer .bottom-details .bottom_text{
+    max-width: 1250px;
+    margin: auto;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .bottom-details .bottom_text span,
+  .bottom-details .bottom_text a{
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+    opacity: 0.8;
+    text-decoration: none;
+  }
+  .bottom-details .bottom_text a:hover{
+    opacity: 1;
+    text-decoration: underline;
+  }
+  .bottom-details .bottom_text a{
+    margin-right: 10px;
+  }
     </style>
 </head>
 
@@ -192,6 +291,46 @@
             <p>Want to sell your car? We offer a quick and easy process to sell your vehicle. Get a great deal today!</p>
         </div>
     </div>
+
+    <footer>
+        <div class="content">
+          <div class="top">
+            <div class="logo-details">
+             
+            </div>
+           
+          </div>
+          <div class="link-boxes">
+            <ul class="box">
+              <li class="link_name" style="color: yellow;">OnlineCar</li>
+              <li><a href="#">Home</a></li>
+              <li><a href="contact.html">Contact us</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="signup-PA.html">Get started</a></li>
+            </ul>
+        
+           
+           
+         
+          </div>
+        </div>
+        <div class="bottom-details">
+          <div class="bottom_text">
+            <span class="copyright_text">Copyright © 2024 <a href="#">OnlineCar.</a>All rights reserved</span>
+            <span class="policy_terms">
+              <a href="#">Privacy policy</a>
+              <a href="#">Terms & condition</a>
+            </span>
+          </div>
+        </div>
+      </footer>
+   
+
+
+
 </body>
 
 </html>
+
+      
+   
