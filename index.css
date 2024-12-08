@@ -74,6 +74,7 @@ header {
     opacity: 0;
     animation: fadeSlideUp 4s forwards;
     animation-delay: 1s;
+    
 }
 
 .TekstiNeMes h1:nth-child(1) {
@@ -99,7 +100,7 @@ header {
     align-items: center;
     color:yellow;
     position: relative;
-    top: 420px;
+    top: 620px;
     font-size: 2em;
     opacity: 0;
     animation: fadeSlideUp 4s forwards;
@@ -115,7 +116,7 @@ header {
     position: absolute;
     width: 100%;
     height: 5px;
-    background-color: black;
+    background-color: white;
     bottom: -5px;
     left: 0;
 }
@@ -125,7 +126,7 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 450px;
+    top: 650px;
     font-size: 1.2em;
     text-align: justify; 
     width: 80%; 
@@ -237,3 +238,5 @@ footer{
   .bottom-details .bottom_text a{
     margin-right: 10px;
   }
+
+
