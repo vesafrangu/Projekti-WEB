@@ -1,3 +1,23 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  include 'connect.php';
+ 
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $message = $_POST['message'];
+  
+  $sql = "INSERT INTO `contact` (name, email,message) VALUES ('$name', '$email','$message')";
+  $result = mysqli_query($con, $sql);
+
+  if ($result) {
+    echo "Data inserted successfully!";
+} else {
+    die("Error: " . mysqli_error($con));
+}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -11,7 +31,7 @@
   </head>
   <body>
     <header>
-      <a href="index.html" class="logo">OnlineCar</a>
+      <a href="#" class="logo">OnlineCar</a>
       <nav class="navigation">
           <a href="services.html">Services</a>
           <div class="button-container">
@@ -44,18 +64,18 @@
         <div class="right-side">
           <div class="topic-text">Send us a message</div>
           <p>Nese keni ndonje pyetje ose kerkese per OnlineCar ,ju lutem na shenoni.</p>
-          <form action="#">
+          <form action="contact.php" method="POST" >
             <div class="input-box">
-              <input type="text" placeholder="Enter your name" />
+              <input type="text" placeholder="Enter your name" name="name"/>
             </div>
             <div class="input-box">
-              <input type="text" placeholder="Enter your email" />
+              <input type="text" placeholder="Enter your email" name ="email" />
             </div>
             <div class="input-box message-box">
-              <textarea placeholder="Enter your message"></textarea>
+              <textarea placeholder="Enter your message" name ="message"></textarea>
             </div>
-            <div class="button">
-              <input type="button" value="Send Now" />
+            <div id="buttoni">
+              <input type="submit" value="Send Now" />
             </div>
           </form>
         </div>
