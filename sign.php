@@ -1,34 +1,78 @@
 <?php
+
+class UserRegistration {
+    private $hostname = 'localhost:3307';
+    private $username = 'root';
+    private $password = '';
+    private $database = 'ocardatabase';
+    private $connection;
+
+    public function __construct() {
+        $this->connect();
+    }
+
+   
+    private function connect() {
+        try {
+            $dsn = "mysql:host=$this->hostname;dbname=$this->database";
+            $this->connection = new PDO($dsn, $this->username, $this->password);
+           
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
+
+    
+    public function checkUserExists($username) {
+        $sql = "SELECT * FROM registration WHERE username = :username";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+   
+    public function insertUser($username, $password) {
+        $sql = "INSERT INTO registration (username, password) VALUES (:username, :password)";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        return $stmt->execute();
+    }
+
+    public function getConnection() {
+        return $this->connection;
+    }
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include 'connect.php';
+    $userRegistration = new UserRegistration();
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+  
+    $user = $userRegistration->checkUserExists($username);
 
-    $sql = "SELECT * FROM registration WHERE username = '$username'";
-    $result = mysqli_query($con, $sql);
-
-    if ($result) {
-        $num = mysqli_num_rows($result);
-        if ($num > 0) {
-          echo "<span style='color: blue;'>User already exists!</span>";
-        } else {
-            // Insert new user into the database
-            $sql = "INSERT INTO registration (username, password) VALUES ('$username', '$password')";
-            $result = mysqli_query($con, $sql);
-
-            if ($result) {
-              echo "<span style='color: blue;'>Signup succsessfully!</span>";
-            } else {
-                die("Error: " . mysqli_error($con));
-            }
-        }
+    if ($user) {
+        echo "<span style='color: blue;'>User already exists!</span>";
     } else {
-        die("Error: " . mysqli_error($con));
+        
+        $insertResult = $userRegistration->insertUser($username, $password);
+
+        if ($insertResult) {
+            
+            header('Location: formulari.php');
+            exit();
+        } else {
+            die("Error: Unable to insert user.");
+        }
     }
 }
 ?>
+
 
 
 
@@ -58,7 +102,7 @@ header {
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    background-color: black;
+    background-color: transparent;
     color: #ffffff;
     position: fixed;
     top: 0;
@@ -324,37 +368,30 @@ footer{
         </div>
       </footer>
    
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const namePattern = /^[a-zA-Z\s]+$/;
-            const isNameValid = namePattern.test(name);
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const isEmailValid = emailPattern.test(email);
-            const isPasswordValid = password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[\W_]/.test(password);
+    <script>  document.getElementById('registerForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const namePattern = /^[a-zA-Z\s]+$/;
+    const isNameValid = namePattern.test(name);
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const isEmailValid = emailPattern.test(email);
+    const isPasswordValid = password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[\W_]/.test(password);
 
-            if (isNameValid && isEmailValid && isPasswordValid) {
-                window.location.href = "Products.html"; 
-            } else {
-                let errorMessage = 'Please ensure the following:\n';
-                if (!isNameValid) {
-                    errorMessage += '- Name should contain at least a first name and last name (e.g. "Fatlum Syla").\n';
-                }
-                if (!isEmailValid) {
-                    errorMessage += '- Please enter a valid email (e.g. "example@example.com").\n';
-                }
-                if (!isPasswordValid) {
-                    errorMessage += '- Password must be at least 8 characters long, with an uppercase letter, a number, and a symbol.\n';
-                }
-                alert(errorMessage);
-            }
-        
-        });
-        
-        
+   
+        if (!isNameValid) {
+            errorMessage += '- Name should contain at least a first name and last name (e.g. "Fatlum Syla").\n';
+        }
+        if (!isEmailValid) {
+            errorMessage += '- Please enter a valid email (e.g. "example@example.com").\n';
+        }
+        if (!isPasswordValid) {
+            errorMessage += '- Password must be at least 8 characters long, with an uppercase letter, a number, and a symbol.\n';
+        }
+        alert(errorMessage);
+    }
+});</script>
           
 
         
