@@ -1,21 +1,65 @@
 <?php
+
+class UserLogin {
+    private $hostname = 'localhost:3307';
+    private $username = 'root';
+    private $password = '';
+    private $database = 'ocardatabase';
+    private $connection;
+
+    public function __construct() {
+        $this->connect();
+    }
+
+ 
+    private function connect() {
+        try {
+            $dsn = "mysql:host=$this->hostname;dbname=$this->database";
+            $this->connection = new PDO($dsn, $this->username, $this->password);
+           
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
+
+   
+    public function checkCredentials($username, $password) {
+        $sql = "SELECT * FROM registration WHERE username = :username AND password = :password";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getConnection() {
+        return $this->connection;
+    }
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include 'connect.php';
+    $userLogin = new UserLogin();
 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
  
-    $sql = "SELECT * FROM registration WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($con, $sql);
+    $user = $userLogin->checkCredentials($username, $password);
 
-    if ($result) {
-        $num = mysqli_num_rows($result);
-        if ($num > 0) {
-            echo "<span style='color: blue;'>Login success!</span>";
+    if ($user) {
+        $role = $user['role'];
+
+      
+        if ($role == 'admin') {
+            header('Location: formulari.php');
         } else {
-            echo "<span style='color: blue;'>Invalid data</span>";
+            header('Location: Products.php');
         }
+        exit();
+    } else {
+        echo "<span style='color: blue;'>Invalid data</span>";
     }
 }
 ?>
@@ -333,31 +377,7 @@ footer{
       </footer>
    
       
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const isEmailValid = emailPattern.test(email);
-            const isPasswordValid = password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[\W_]/.test(password);
-
-            if (isEmailValid && isPasswordValid) {
-                window.location.href = "#"; 
-            } else {
-                let errorMessage = 'Please ensure the following:\n';
-                if (!isEmailValid) {
-                    errorMessage += '- Enter a valid email (e.g., "example@example.com").\n';
-                }
-                if (!isPasswordValid) {
-                    errorMessage += '- Password must be at least 8 characters long.\n';
-                }
-                alert(errorMessage);
-            }
-        }); -->
-    <!-- </script>
+    
 </body>
 </html>
 
