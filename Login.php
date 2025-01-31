@@ -1,3 +1,32 @@
+<?php
+session_start();
+require_once('User.php');
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $user = new User();
+
+    $role = $user->login($username, $password); // Fix: Remove syntax errors
+
+    if ($role) {
+        $_SESSION['username'] = $username;
+        $_SESSION['role'] = $role; // Store role in session
+
+        if ($role === 'user') {
+            header('Location: products.php'); 
+        } else {
+            header('Location: profili.php');
+        }
+        exit();
+    } else {
+        echo "Invalid username or password!";
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +55,7 @@ header {
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    background-color: black;
+    background-color: transparent;
     color: white;
     position: fixed;
     top: 0;
@@ -89,7 +118,7 @@ header {
     color: yellow;
 }
 
-#name, #email,#password {
+#name, #username,#password {
     font-size: 1em;
     margin-top: 10px;
     padding: 10px;
@@ -102,11 +131,11 @@ header {
     border-radius: 5px;
     
 }
-#email {
+#username {
     
     margin-top: 40px;
 }
-#name::placeholder, #email::placeholder,#password::placeholder {
+#name::placeholder, #username::placeholder,#password::placeholder {
     text-align: left; 
     color: #999; 
 }
@@ -255,12 +284,12 @@ footer{
 
     <div class="boksi">
         <div class="brenda" id="loginForm">
-            <form action="">
+            <form action="login.php" method ="POST">
                 <h1 id="ka">Login</h1>
                 <div class="inputs-container">
                   
-                    <input type="email" id="email" placeholder="Email">
-                    <input type="password" id="password" placeholder="Password">
+                    <input type="text" id="username" name ="username" placeholder="username">
+                    <input type="password" id="password" name ="password" placeholder="Password">
 
                     
                 </div>
@@ -307,30 +336,7 @@ footer{
       </footer>
    
       
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const isEmailValid = emailPattern.test(email);
-            const isPasswordValid = password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password) && /[\W_]/.test(password);
-
-            if (isEmailValid && isPasswordValid) {
-                window.location.href = "#"; 
-            } else {
-                let errorMessage = 'Please ensure the following:\n';
-                if (!isEmailValid) {
-                    errorMessage += '- Enter a valid email (e.g., "example@example.com").\n';
-                }
-                if (!isPasswordValid) {
-                    errorMessage += '- Password must be at least 8 characters long.\n';
-                }
-                alert(errorMessage);
-            }
-        });
-    </script>
+    
 </body>
 </html>
+
