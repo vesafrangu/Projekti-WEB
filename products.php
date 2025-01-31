@@ -1,13 +1,31 @@
-<?php
-include 'Car.php';  
-include 'CarRentalSystem.php';  
+<<?php
+require_once 'DbConnect.php';
 
-$carSystem = new CarRentalSystem();
 
-$carSystem->addCar(new Car('Toyota', 'C-HR 2021', 2021, 25000, 15000, 'For Sale', 'toyota2021.jpg'));
-$carSystem->addCar(new Car('BMW', '750i xDrive', 2016, 23000, 60000, 'For Sale', 'bmw.jpg'));
-$carSystem->addCar(new Car('Audi', 'A4 TFSI S Line', 2018, 400, 15000, 'For Rent', 'audi.jpg'));
-$carSystem->addCar(new Car('Mercedes', 'AMG GT-C Roadster', 2016, 80000, 30000, 'For Sale', 'mercedes.jpg'));
+$dbConnect = new DbConnect();
+$conn = $dbConnect->connect();
+
+
+if (!$conn) {
+    die("Database connection failed.");
+}
+
+e
+$sql = "SELECT cars.*, registration.username 
+        FROM cars 
+        JOIN registration ON cars.username = registration.username"; // Corrected JOIN condition
+
+try {
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+
+    die("Query failed: " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
@@ -15,124 +33,83 @@ $carSystem->addCar(new Car('Mercedes', 'AMG GT-C Roadster', 2016, 80000, 30000, 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cars for Sale and Rent</title>
+    <title>Car Listings</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Poppins', Arial, Helvetica, sans-serif;
-            background-color: black;
-            color: white;
-            margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
         }
-
-        .logo {
-            color: yellow;
-            font-size: 2.5em;
-            font-weight: bold; 
-            padding: 20px 30px;
-            text-decoration: none;
-            position: absolute;
-            top: 15px;
-            left: 30px;
-        }
-
-        .cars-section {
-            padding: 50px 0;
-            background-color: #333;
-        }
-
-        .cars-section h2 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            color: yellow;
-        }
-
-        .car-cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        .car-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            padding: 20px;
+            margin: 20px auto;
+            max-width: 1200px;
         }
-
-        .car-card {
-            background-color: #444;
-            color: white;
-            padding: 30px;
-            flex-basis: calc(33.33% - 40px);
+        .car-box {
+            border: 1px solid #ccc;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-
-        .car-card img {
+        .car-box img {
             width: 100%;
-            height: auto;
-            border-radius: 8px;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #ccc;
         }
-
-        .car-card h3 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: yellow;
+        .car-box h3 {
+            font-size: 1.2rem;
+            margin: 10px 0;
         }
-
-        .car-card p {
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            color: white;
+        .car-box p {
+            color: #666;
+            margin-bottom: 10px;
         }
-
-        .car-card a {
-            text-decoration: none;
-            color: yellow;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        .car-card a:hover {
-            color: #0a0a71;
-        }
-
-        @media (max-width: 768px) {
-            .car-card {
-                flex-basis: 100%;
-            }
+        .no-data {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
-    <section class="cars-section">
-        <h2>Discover Your Dream Ride: The Finest Cars for Sale and Rent</h2>
-        <p style="font-style: italic; text-align: center;">
-            Explore our wide selection of high-quality cars available for sale or rent.<br>
-            Whether you're looking for a luxury vehicle,<br>
-            a reliable daily driver,<br>
-            or a stylish sports car, we have the perfect ride for you.
-        </p>
 
-        <div class="car-cards">
-            <?php
-            // Shfaq makinat nga sistemi
-            $cars = $carSystem->getCars();
-            foreach ($cars as $car) {
-                $details = $car->getDetails();
-                echo '
-                    <div class="car-card">
-                        <img src="' . $details['image'] . '" alt="' . $details['make'] . ' ' . $details['model'] . '">
-                        <h3>' . $details['type'] . ': ' . $details['make'] . ' ' . $details['model'] . '</h3>
-                        <p>Price: $' . $details['price'] . '<br>Year: ' . $details['year'] . '<br>Mileage: ' . $details['mileage'] . ' miles</p>
-                        <a href="#">More Information</a>
-                    </div>
-                ';
+<h1 style="text-align: center;">Car Listings</h1>
+
+<div class="car-container">
+    <?php
+    if (!empty($result)) {
+        foreach ($result as $row) {
+            $car_name = htmlspecialchars($row['car_name']);
+            $car_year = htmlspecialchars($row['car_year']);
+            $car_image = htmlspecialchars($row['car_image']);
+            $username = htmlspecialchars($row['username']); 
+
+     
+            $image_path = 'uploads/' . $car_image;
+            if (!file_exists($image_path)) {
+                $image_path = 'uploads/default.jpg'; 
             }
-            ?>
-        </div>
-    </section>
+
+            echo "
+                <div class='car-box'>
+                    <img src='$image_path' alt='Car Image'>
+                    <h3>$car_name</h3>
+                    <h3>Owner: $username</h3>
+                    <p>Year: $car_year</p>
+                </div>
+            ";
+        }
+    } else {
+        echo "<p class='no-data'>No cars found in the database.</p>";
+    }
+    ?>
+</div>
+
 </body>
 </html>
