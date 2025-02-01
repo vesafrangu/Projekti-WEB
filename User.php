@@ -1,9 +1,9 @@
 <?php
-require_once('DbConnect.php'); // Include the DB connection
+require_once('DbConnect.php');
 
 class User {
     private $dbConn;
-    private $registration = 'registration'; // Table name
+    private $registration = 'registration'; 
     private $registration2 = 'contact';
 
     public function __construct() {
@@ -59,7 +59,7 @@ class User {
 
     
 
-    // Function to log in the user
+
     public function login($username, $password) {
         $sql = "SELECT * FROM $this->registration WHERE username = :username";
         $stmt = $this->dbConn->prepare($sql);
@@ -68,10 +68,10 @@ class User {
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        // Directly compare plain text password with the stored password
+     
         if ($user && $password === $user['password']) {
-            session_start(); // Ensure session is started for storing session variables
-            $_SESSION['username'] = $user['username']; // Store username in session
+            session_start();
+            $_SESSION['username'] = $user['username']; 
             $_SESSION['role'] = $user['role'];
 
             return $user['role'];
@@ -100,7 +100,7 @@ class User {
     }
 
     public function delete($username) {
-        // Use the correct property for the table name
+    
         $sql = "DELETE FROM $this->registration WHERE username = :username";
         $stmt = $this->dbConn->prepare($sql);
         $stmt->bindParam(':username', $username);
@@ -112,11 +112,11 @@ class User {
         }
     }
 
-      // Function to log out the user
+   
       public function logout() {
-        session_start(); // Start the session
-        session_unset(); // Unset all session variables
-        session_destroy(); // Destroy the session
+        session_start(); 
+        session_unset();
+        session_destroy(); 
         return true;
     }
 }
@@ -136,6 +136,11 @@ class User {
 </head>
 <body>
 
+
+
+    
+</body>
+</html>
 
 
     
