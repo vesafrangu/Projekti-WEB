@@ -7,9 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $user = new User();
 
-    if ($user->create2($username, $password,"user")) { // FIX: Removed extra "user" parameter
+    if ($user->create2($username, $password,"user")) {
         echo "User registered successfully!";
-        header('Location: products.php'); // Redirect to login page
+        header('Location: products.php');
         exit();
     } else {
         echo "User registration failed!";
@@ -262,7 +262,7 @@ footer{
             <h1 id="ka">Register a new account</h1>
             <div class="inputs-container">
                 <input type="text" id="name" name="username" placeholder="Name" required>
-                <input type="email" id="email" name="email" placeholder="Email" required>
+                
                 <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
             <button type="submit" class="regjister">Register</button>
@@ -306,6 +306,48 @@ footer{
           </div>
         </div>
       </footer>
+
+      <script>
+        document.getElementById('registerForm').onsubmit = function(event) {
+
+    const name = document.getElementById('name').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+
+    if (name === '') {
+        alert('Name is required.');
+        event.preventDefault(); 
+        return false;
+    }
+
+
+    const hasUppercase = /[A-Z]/.test(name);
+    const hasNumber = /[0-9]/.test(name);
+
+    if (!hasUppercase || !hasNumber) {
+        alert('Name must contain at least one uppercase letter and one number.');
+        event.preventDefault(); 
+        return false;
+    }
+
+   
+    if (password === '') {
+        alert('Password is required.');
+        event.preventDefault(); 
+        return false;
+    }
+
+    if (password.length < 8) {
+        alert('Password must be at least 8 characters long.');
+        event.preventDefault(); 
+        return false;
+    }
+
+    
+    return true;
+};
+      </script>
+
 
     
 </body>
