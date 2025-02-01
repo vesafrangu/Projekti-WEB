@@ -1,70 +1,29 @@
 <?php
+require_once('User.php');
 
-class ContactForm {
-    private $hostname = 'localhost:3307';
-    private $username = 'root';
-    private $password = '';
-    private $database = 'ocardatabase';
-    private $connection;
-
-    public function __construct() {
-        $this->connect();
-    }
-
-    // PDO connection method
-    private function connect() {
-        try {
-            $dsn = "mysql:host=$this->hostname;dbname=$this->database";
-            $this->connection = new PDO($dsn, $this->username, $this->password);
-            // Set PDO error mode to exception
-            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Connection failed: " . $e->getMessage());
-        }
-    }
-
-    // Insert contact form data using prepared statement
-    public function insertContact($name, $email, $message) {
-        $sql = "INSERT INTO `contact` (name, email, message) VALUES (:name, :email, :message)";
-        $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':message', $message);
-        return $stmt->execute();
-    }
-
-    public function getConnection() {
-        return $this->connection;
-    }
-}
-
-// Handling POST request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $contactForm = new ContactForm();
-
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    // Insert contact form data into the database
-    $result = $contactForm->insertContact($name, $email, $message);
+    $user = new User();
 
-    if ($result) {
-        echo "Data inserted successfully!";
+    if ($user->sendMessage($name, $email,$message)) {
+        echo "sent successfully!";
+        header('location:contact.php');
+        exit();
     } else {
-        die("Error: Unable to insert data.");
+        echo "User registration failed!";
     }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <title>Kontakt</title>
-    <link rel="stylesheet" href="contact2.css" />
+    <link rel="stylesheet" href="contact.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.2/collection/components/icon/icon.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -72,12 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </head>
   <body>
     <header>
-      <a href="#" class="logo">OnlineCar</a>
+      <a href="index.html" class="logo">OnlineCar</a>
       <nav class="navigation">
           <a href="services.html">Services</a>
           <div class="button-container">
-              <button onclick="location.href='login.html'" class="login-button">Login</button>
-              <button onclick="location.href='signup-PA.html'" class="signup-button">Sign Up</button>
+              <button onclick="location.href='login.php'" class="login-button">Login</button>
+              <button onclick="location.href='choose.html'" class="signup-button">Sign Up</button>
           </div>
       </nav>
   </header>
@@ -105,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="right-side">
           <div class="topic-text">Send us a message</div>
           <p>Nese keni ndonje pyetje ose kerkese per OnlineCar ,ju lutem na shenoni.</p>
-          <form action="contact2.php" method="POST" >
+          <form action="contact.php" method="POST" >
             <div class="input-box">
               <input type="text" placeholder="Enter your name" name="name"/>
             </div>
@@ -115,9 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="input-box message-box">
               <textarea placeholder="Enter your message" name ="message"></textarea>
             </div>
-            <div id="buttoni">
-              <input type="submit" value="Send Now" />
-            </div>
+            <div class="buttoni2">
+  <input type="submit" value="Send Now" style="background-color: blue; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;" />
+</div>
+
           </form>
         </div>
       </div>
@@ -160,7 +120,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>document.querySelector("form").addEventListener("submit", function(event) {
+    let name = document.querySelector("input[name='name']").value.trim();
+    let email = document.querySelector("input[name='email']").value.trim();
+    let message = document.querySelector("textarea[name='message']").value.trim();
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (name === "") {
+        alert("Please enter your name.");
+        event.preventDefault();
+        return;
+    }
+
+    if (email === "" || !emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        event.preventDefault();
+        return;
+    }
+
+    if (message === "") {
+        alert("Please enter your message.");
+        event.preventDefault();
+    }
+});
+</script>
   </body>
 </html>
+
 
 
