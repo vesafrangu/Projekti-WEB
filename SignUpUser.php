@@ -267,7 +267,7 @@ footer{
             </div>
             <button type="submit" class="regjister">Register</button>
         </form>
-            <a href="Login.html" style="text-decoration: none; color: black; position: relative; top: 20px;">
+            <a href="login.php" style="text-decoration: none; color: black; position: relative; top: 20px;">
                <strong> <p id="tF">Already have an account? Log in</p></strong>
             </a>
         </div>
