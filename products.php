@@ -8,9 +8,10 @@ if (!$conn) {
     die("Database connection failed.");
 }
 
-$sql = "SELECT cars.*, registration.username 
+$sql = "SELECT DISTINCT cars.*, registration.username 
         FROM cars 
-        JOIN registration ON cars.username = registration.username"; // Corrected JOIN condition
+        JOIN registration ON cars.username = registration.username";
+
 
 try {
     $stmt = $conn->prepare($sql);
@@ -31,7 +32,62 @@ try {
     body{
         background:linear-gradient(to right,black,red);
     }
-     
+    header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: transparent;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .logo {
+            padding-left: 40px;
+            font-size: 3em;
+            color: yellow;
+            text-decoration: none;
+            user-select: none;
+            margin-right: auto;
+        }
+        .navigation {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-left: auto;
+        }
+        .navigation a {
+            font-size: 1.1em;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .button-container {
+            display: flex;
+            gap: 15px;
+        }
+        .login-button, .signup-button {
+            padding: 8px 16px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: yellow;
+            color: rgb(0, 0, 0);
+            transition: background-color 0.2s ease;
+            position: relative;
+            right:50px;
+        }
+
+        .login-button{
+            background-color: yellow;
+        }
+        .login-button:hover{
+            background-color: #86a814;
+        }
+      
         .product-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr); 
@@ -66,11 +122,13 @@ try {
         }
 
         .product-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #333;
-        }
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+    white-space: nowrap; /* Ensure text doesn't wrap */
+    overflow: visible; /* Ensure text is not hidden */
+}
 
         .product-price {
             font-size: 16px;
@@ -111,7 +169,15 @@ try {
 </head>
 <body>
 
-<h1 style="text-align: center;">Car Listings</h1>
+<header>
+        <a href="index.html" class="logo">OnlineCar</a>
+        <nav class="navigation">
+       
+            <button onclick="location.href='logout.php'" class="login-button">Logout</button>
+        </nav>
+    </header>
+
+    <h1 style="text-align: center; margin-top: 100px; color:white;">Car Listings</h1>
 
 <div class="product-container">
     <?php
