@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $car_name = $_POST['car_name'];
     $car_year = $_POST['car_year'];
     $car_image = $_FILES['car_image']; 
-    $username = $_SESSION['username']; 
+    $username = $_SESSION['username'];
+    $phoneNumber = $_POST['phoneNumber']; 
 
 
     $file_name = preg_replace('/[^A-Za-z0-9.\-_]/', '_', $car_image['name']);
@@ -37,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (move_uploaded_file($car_image['tmp_name'], $target_file)) {
     
-        if ($car->create($car_name, $car_year, $file_name, $username)) {
+        if ($car->create($car_name, $car_year, $file_name, $username,$phoneNumber)) {
             echo "<span style='color: blue;'>Data inserted successfully!</span>";
         } else {
             echo "<span style='color: red;'>Error inserting data into the database.</span>";
@@ -98,6 +99,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .form-container input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+       
     </style>
 </head>
 <body>
@@ -113,6 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label for="carImage">Car Image:</label>
         <input type="file" id="carImage" name="car_image" accept="image/jpeg" required>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="number" id="phoneNumber" name="phoneNumber"  required>
 
 
         <input type="submit" value="Submit">
