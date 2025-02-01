@@ -40,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
         if ($car->create($car_name, $car_year, $file_name, $username,$phoneNumber)) {
             echo "<span style='color: blue;'>Data inserted successfully!</span>";
+            header('Location: profili.php');
+            exit();
         } else {
             echo "<span style='color: red;'>Error inserting data into the database.</span>";
         }
