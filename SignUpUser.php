@@ -286,9 +286,9 @@ footer{
             <ul class="box">
               <li class="link_name" style="color: yellow;">OnlineCar</li>
               <li><a href="#">Home</a></li>
-              <li><a href="contact.html">Contact us</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="signup-PA.html">Get started</a></li>
+              <li><a href="contact.php">Contact us</a></li>
+              <li><a href="AboutUs.html">About us</a></li>
+              <li><a href="choose.html">Get started</a></li>
             </ul>
         
            
