@@ -11,8 +11,8 @@ class Car {
     }
 
 
-    public function create($car_name, $car_year, $car_image, $username) {
-        $sql = "INSERT INTO $this->table (car_name, car_year, car_image, username) VALUES (:car_name, :car_year, :car_image, :username)";
+    public function create($car_name, $car_year, $car_image, $username,$phoneNumber) {
+        $sql = "INSERT INTO $this->table (car_name, car_year, car_image, username,phoneNumber) VALUES (:car_name, :car_year, :car_image, :username,:phoneNumber)";
         $stmt = $this->dbConn->prepare($sql);
 
    
@@ -20,6 +20,7 @@ class Car {
         $stmt->bindParam(':car_year', $car_year);
         $stmt->bindParam(':car_image', $car_image);
         $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':phoneNumber', $phoneNumber);
 
         if ($stmt->execute()) {
             return true;
