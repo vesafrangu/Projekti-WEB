@@ -34,14 +34,14 @@ header {
   z-index: 1000;
 }
 
-.logo {
+/* .logo {
   padding-left: 40px;
   font-size: 3em;
   color: yellow;
   text-decoration: none;
   user-select: none;
   margin-right: auto;
-}
+} */
 
 .navigation {
   display: flex;
@@ -202,23 +202,10 @@ header {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
-.right-side .button input[type="button"] {
-  color: #fff;
-  font-size: 18px;
-  outline: none;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  background: blue;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
-}
 
-.button input[type="button"]:hover {
-  background: yellow;
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
-}
+
+
+
 
 footer{
   position: relative;
@@ -317,6 +304,8 @@ footer .bottom-details .bottom_text{
 .bottom-details .bottom_text a{
   margin-right: 10px;
 }
+
+
 
 
 
