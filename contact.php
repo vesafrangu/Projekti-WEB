@@ -21,6 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
+      <style>
+  .logo {
+  padding-left: 40px;
+  font-size: 3em;
+  color: yellow;
+  text-decoration: none;
+  user-select: none;
+  margin-right: auto;
+  }
+</style>
     <meta charset="UTF-8" />
     <title>Kontakt</title>
     <link rel="stylesheet" href="contact.css" />
