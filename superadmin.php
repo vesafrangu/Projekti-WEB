@@ -1,14 +1,15 @@
 <?php
 session_start();
 require_once('User.php');
+require_once('Car.php'); 
 
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'superadmin') {
-    die("Access denied. You must be a super admin to view this page.");
-}
 
 $user = new User();
-$users = $user->getAllUsers(); 
+$users = $user->getAllUsers();
+
+$car = new Car();
+$cars = $car->getAllCarsByUser(); 
 ?>
 
 <!DOCTYPE html>
@@ -134,12 +135,20 @@ $users = $user->getAllUsers();
 
     
     <h2>All Users</h2>
+    <div class="container">
+    <div class="dashboard-header">
+        <h2>AdminiKryesor Dashboard</h2>
+        <a href="logout.php" class="button">Logout</a>
+    </div>
+
+    <h2>All Users</h2>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Username</th>
                 <th>Role</th>
+                <th>Cars</th> <!-- New column for cars -->
                 <th>Actions</th>
             </tr>
         </thead>
@@ -150,18 +159,26 @@ $users = $user->getAllUsers();
                     <td><?php echo htmlspecialchars($user['username']); ?></td>
                     <td><?php echo htmlspecialchars($user['role']); ?></td>
                     <td>
-                       
-                        <<form action="update.php" method="GET" style="display:inline;">
-    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-    <button type="submit" class="button">Edit</button>
-</form>
+                        <?php 
+                            // Loop through the cars and check for cars associated with the user
+                            foreach ($cars as $car) {
+                                if ($car['username'] === $user['username']) {
+                                    echo htmlspecialchars($car['car_name']) . ' (' . htmlspecialchars($car['car_year']) . ')<br>';
+                                }
+                            }
+                        ?>
+                    </td>
+                    <td>
+                        <form action="update.php" method="GET" style="display:inline;">
+                            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+                            <button type="submit" class="button">Edit</button>
+                        </form>
 
-                       
-             
-                  <form action="delete.php" method="POST" style="display:inline;">
-        <input type="hidden" name="username" value="<?php echo $user['username']; ?>">
-        <button type="submit" onclick="return confirm('Are you sure you want to delete this user?');" class="button">Delete</button>
-    </form>
+                        <form action="delete.php" method="POST" style="display:inline;">
+                            <input type="hidden" name="username" value="<?php echo $user['username']; ?>">
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this user?');" class="button">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
