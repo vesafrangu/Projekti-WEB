@@ -1,9 +1,9 @@
 <?php
-require_once('DbConnect.php'); // Include the DB connection
+require_once('DbConnect.php'); 
 
 class Car {
     private $dbConn;
-    private $table = 'cars'; // Table name
+    private $table = 'cars'; 
 
     public function __construct() {
         $db = new DbConnect();
@@ -79,5 +79,14 @@ public function getCarById($car_id) {
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+public function getAllCarsByUser() {
+    $sql = "SELECT * FROM $this->table";
+    $stmt = $this->dbConn->prepare($sql);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }
 ?>
